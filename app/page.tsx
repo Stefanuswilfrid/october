@@ -193,6 +193,29 @@ export default function HomePage() {
                       ? "Try asking: 'show my emails' or 'what's on my calendar'"
                       : "Sign in with Google to access your emails and calendar"}
                   </p>
+                  
+                  {/* Setup warning if env not configured */}
+                  {!isSignedIn && typeof window !== "undefined" && !process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID && (
+                    <div className="mt-6 rounded-lg border border-yellow-500/20 bg-yellow-500/10 p-4 text-left">
+                      <div className="flex items-start gap-3">
+                        <span className="text-2xl">⚠️</span>
+                        <div className="space-y-2">
+                          <p className="text-sm font-semibold text-yellow-500">
+                            Environment Setup Required
+                          </p>
+                          <p className="text-xs text-zinc-400">
+                            The Google OAuth is not configured. Please create a <code className="rounded bg-zinc-800 px-1 py-0.5">.env.local</code> file with your Google Client ID.
+                          </p>
+                          <p className="text-xs text-zinc-400">
+                            📖 Open browser console (F12) and click "Sign in with Google" to see detailed debug logs.
+                          </p>
+                          <p className="text-xs text-blue-400">
+                            See <code className="rounded bg-zinc-800 px-1 py-0.5">ENV_SETUP.md</code> for step-by-step instructions.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
